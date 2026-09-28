@@ -1,0 +1,68 @@
+/*
+Theme Name: TERMIMAL Portfolio
+Theme URI: https://termimal.com
+Author: TERMIMAL
+Author URI: https://termimal.com
+Description: Modern, dark-first, AI-tech portfolio theme for TERMIMAL. Built as a Block Theme with Full Site Editing, inspired by the </TERMIMAL> logo. Supports product showcase, galleries, related products and smooth purposeful animations.
+Requires at least: 6.4
+Tested up to: 6.7
+Requires PHP: 8.0
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: termimal
+Tags: portfolio, block-theme, full-site-editing, dark-mode, custom-colors, custom-logo, threaded-comments, translation-ready
+*/
+
+:root {
+  --termimal-primary: #00F0FF;
+  --termimal-primary-dim: #00B8C4;
+  --termimal-secondary: #7B61FF;
+  --termimal-accent: #00FF9D;
+  --termimal-bg: #0A0A0A;
+  --termimal-surface: #111111;
+  --termimal-border: #2A2A2A;
+  --termimal-text: #FFFFFF;
+  --termimal-muted: #A3A3A3;
+}
+
+body {
+  background-color: var(--termimal-bg);
+  color: var(--termimal-text);
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.termimal-logo-mark {
+  font-family: "Space Grotesk", "Orbitron", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.termimal-product-card {
+  background: var(--termimal-surface);
+  border: 1px solid var(--termimal-border);
+  border-radius: 12px;
+  transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.termimal-product-card:hover {
+  border-color: var(--termimal-primary);
+  box-shadow: 0 0 24px rgba(0, 240, 255, 0.18);
+}
+
+:focus-visible {
+  outline: 2px solid var(--termimal-primary);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
