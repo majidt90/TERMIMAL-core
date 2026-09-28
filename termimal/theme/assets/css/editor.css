@@ -1,0 +1,13 @@
+/**
+ * Editor styles – keep the editing experience close to the front-end.
+ */
+body {
+	font-family: Inter, system-ui, sans-serif;
+	background-color: #0A0A0A;
+	color: #FFFFFF;
+}
+
+.editor-styles-wrapper {
+	background-color: #0A0A0A;
+	color: #FFFFFF;
+}
