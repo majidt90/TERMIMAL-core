@@ -2,71 +2,71 @@
 
 Modern, dark-first WordPress Block Theme and companion plugin for the TERMIMAL AI-tools portfolio.
 
-## Contents
+**Version:** Theme 1.0.0 · Plugin 1.0.1
+
+## Quick Install (recommended)
+
+Download the separate packages and upload via WordPress admin:
+
+| Package | Upload to |
+|---------|-----------|
+| `termimal-core-plugin.zip` | **Plugins → Add New → Upload** |
+| `termimal-theme.zip` | **Appearance → Themes → Add New → Upload** |
+
+After activation:
+1. Activate **TERMIMAL Core** plugin
+2. Activate **TERMIMAL Portfolio** theme
+3. Go to **Products → Add New**
+
+### Expected folder structure after install
 
 ```
-termimal/
-├── theme/                  # Block Theme (TERMIMAL Portfolio)
-│   ├── style.css
-│   ├── theme.json          # Design tokens from brand system
-│   ├── functions.php
-│   ├── templates/
-│   │   ├── index.html
-│   │   ├── archive-termimal_product.html
-│   │   └── single-termimal_product.html
-│   ├── parts/
-│   │   ├── header.html
-│   │   └── footer.html
-│   └── assets/
-└── plugin/                 # Companion plugin (TERMIMAL Core)
-    ├── termimal-core.php
-    ├── includes/
-    │   ├── class-cpt.php       # Product CPT
-    │   ├── class-meta.php      # URL, Gallery, Related products
-    │   └── class-admin.php     # Settings page
-    └── assets/js/admin-gallery.js
+wp-content/plugins/termimal-core/
+  ├── termimal-core.php
+  ├── includes/
+  └── assets/
+
+wp-content/themes/termimal/
+  ├── style.css
+  ├── theme.json
+  ├── functions.php
+  ├── screenshot.png
+  ├── templates/
+  ├── parts/
+  └── assets/
 ```
 
 ## Features
 
-- **Product CPT** (`termimal_product`) with archive + single templates
-- **Product Details**: external link / URL
-- **Gallery / Album**: multi-image media uploader
-- **Related Products**: multi-select linking between products
-- **Admin Settings** page under Settings → TERMIMAL
-- **Brand-aligned design tokens** (dark-first, cyan primary `#00F0FF`, Space Grotesk + Inter)
-- **Block Theme** with Full Site Editing support
-- Accessibility & reduced-motion ready
+- Product CPT (`termimal_product`) with archive + single templates
+- External product link
+- Multi-image gallery / album
+- Related products linking
+- Admin settings (Settings → TERMIMAL)
+- Brand design tokens (dark-first, cyan `#00F0FF`)
+- Light mode style variation
+- CSS animations (aurora + blur-in, reduced-motion safe)
 
-## Installation
+## Manual install from this repo
 
-1. Copy `theme/` folder into `wp-content/themes/termimal` (or zip and upload).
-2. Copy `plugin/` folder into `wp-content/plugins/termimal-core` (or zip and upload).
-3. Activate the **TERMIMAL Core** plugin.
-4. Activate the **TERMIMAL Portfolio** theme.
-5. Go to **Products → Add New** and start adding products.
-6. Optionally configure **Settings → TERMIMAL**.
+```bash
+# Plugin
+cp -r termimal/plugin /path/to/wp-content/plugins/termimal-core
 
-## Adding a Product
+# Theme
+cp -r termimal/theme /path/to/wp-content/themes/termimal
+```
 
-1. Title + Description (Block Editor)
-2. Set Featured Image (cover)
-3. Product Details box → External Link
-4. Gallery box → Add multiple images for the album
-5. Related Products sidebar → select other products to link
+## Changelog
+
+### Plugin 1.0.1
+- Fix: register CPT on `init` (prevents critical error)
+- Defensive file loading (missing includes no longer white-screen the site)
+- Requires PHP 7.4+, WordPress 6.0+
+
+### 1.0.0
+- Initial release
 
 ## Design System
 
-All colors, typography and radii come from the Phase 2.5 brand extraction (`</TERMIMAL>` logo).  
-See `docs/brand/` for the full token set.
-
-## Next Steps (optional enhancements)
-
-- Front-end rendering of gallery & related products on single template (via shortcode or block)
-- React Bits integration (Soft Aurora / BlurText) limited to 2–3 components per page
-- Style variations for light mode
-- Product pattern library
-
----
-
-Built according to the TERMIMAL-core knowledge base (Phases 1–3).
+See `docs/brand/` for full tokens extracted from the `</TERMIMAL>` logo.
