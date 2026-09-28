@@ -1,0 +1,77 @@
+/**
+ * TERMIMAL purposeful animations
+ * Inspired by React Bits guidance: max 2–3 effects, respect reduced-motion.
+ */
+
+.termimal-aurora {
+	position: relative;
+	overflow: hidden;
+	isolation: isolate;
+}
+
+.termimal-aurora::before {
+	content: "";
+	position: absolute;
+	inset: -20%;
+	background:
+		radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 240, 255, 0.12), transparent 50%),
+		radial-gradient(ellipse 60% 40% at 80% 60%, rgba(123, 97, 255, 0.10), transparent 50%),
+		radial-gradient(ellipse 50% 30% at 50% 80%, rgba(0, 255, 157, 0.06), transparent 50%);
+	animation: termimal-aurora-shift 18s ease-in-out infinite alternate;
+	z-index: -1;
+	pointer-events: none;
+}
+
+@keyframes termimal-aurora-shift {
+	0%   { transform: translate(0, 0) scale(1); opacity: 0.9; }
+	50%  { transform: translate(-3%, 2%) scale(1.05); opacity: 1; }
+	100% { transform: translate(2%, -2%) scale(1.02); opacity: 0.85; }
+}
+
+.termimal-blur-in {
+	animation: termimal-blur-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes termimal-blur-in {
+	from {
+		opacity: 0;
+		filter: blur(12px);
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		filter: blur(0);
+		transform: translateY(0);
+	}
+}
+
+.termimal-stagger > * {
+	animation: termimal-blur-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.termimal-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.termimal-stagger > *:nth-child(2) { animation-delay: 0.12s; }
+.termimal-stagger > *:nth-child(3) { animation-delay: 0.19s; }
+.termimal-stagger > *:nth-child(4) { animation-delay: 0.26s; }
+.termimal-stagger > *:nth-child(5) { animation-delay: 0.33s; }
+.termimal-stagger > *:nth-child(6) { animation-delay: 0.40s; }
+
+.termimal-product-card {
+	transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+	            box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+	            transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.termimal-product-card:hover {
+	transform: translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.termimal-aurora::before { animation: none; }
+	.termimal-blur-in,
+	.termimal-stagger > * {
+		animation: none;
+		opacity: 1;
+		filter: none;
+		transform: none;
+	}
+	.termimal-product-card:hover { transform: none; }
+}

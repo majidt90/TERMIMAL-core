@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Light",
+	"settings": {
+		"color": {
+			"palette": [
+				{ "slug": "black", "color": "#000000", "name": "Black" },
+				{ "slug": "white", "color": "#FFFFFF", "name": "White" },
+				{ "slug": "gray-950", "color": "#0A0A0A", "name": "Gray 950" },
+				{ "slug": "gray-900", "color": "#111111", "name": "Gray 900" },
+				{ "slug": "gray-800", "color": "#F5F5F5", "name": "Gray 800 (light surface)" },
+				{ "slug": "gray-700", "color": "#E5E5E5", "name": "Gray 700 (light border)" },
+				{ "slug": "gray-400", "color": "#525252", "name": "Gray 400" },
+				{ "slug": "primary", "color": "#00B8C4", "name": "Primary (Cyan)" },
+				{ "slug": "primary-dim", "color": "#0099A3", "name": "Primary Dim" },
+				{ "slug": "secondary", "color": "#6B4EFF", "name": "Secondary (Purple)" },
+				{ "slug": "accent", "color": "#00D484", "name": "Accent (Neon)" }
+			]
+		}
+	},
+	"styles": {
+		"color": {
+			"background": "var(--wp--preset--color--white)",
+			"text": "var(--wp--preset--color--black)"
+		},
+		"elements": {
+			"link": {
+				"color": { "text": "var(--wp--preset--color--primary)" },
+				":hover": { "color": { "text": "var(--wp--preset--color--primary-dim)" } }
+			},
+			"button": {
+				"color": {
+					"background": "var(--wp--preset--color--primary)",
+					"text": "var(--wp--preset--color--white)"
+				}
+			}
+		}
+	}
+}
