@@ -1,0 +1,43 @@
+<!-- wp:template-part {"slug":"header","area":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"termimal-aurora","style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|12"}}},"layout":{"type":"constrained"}} -->
+<main class="wp-block-group termimal-aurora" style="padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--12)">
+
+	<!-- wp:heading {"textAlign":"center","level":1,"className":"termimal-blur-in","fontSize":"5xl","fontFamily":"display"} -->
+	<h1 class="wp-block-heading has-text-align-center termimal-blur-in has-display-font-family has-5-xl-font-size">TERMIMAL</h1>
+	<!-- /wp:heading -->
+
+	<!-- wp:paragraph {"align":"center","className":"termimal-blur-in","textColor":"gray-400","fontSize":"lg"} -->
+	<p class="has-text-align-center termimal-blur-in has-gray-400-color has-text-color has-lg-font-size">AI-powered tools built for precision.</p>
+	<!-- /wp:paragraph -->
+
+	<!-- wp:spacer {"height":"48px"} -->
+	<div style="height:48px" aria-hidden="true" class="wp-block-spacer"></div>
+	<!-- /wp:spacer -->
+
+	<!-- wp:query {"queryId":1,"query":{"perPage":12,"pages":0,"offset":0,"postType":"termimal_product","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false},"displayLayout":{"type":"flex","columns":3},"align":"wide","className":"termimal-stagger"} -->
+	<div class="wp-block-query alignwide termimal-stagger">
+		<!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
+			<!-- wp:group {"className":"termimal-product-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|4","bottom":"var:preset|spacing|4","left":"var:preset|spacing|4","right":"var:preset|spacing|4"}},"border":{"radius":"12px"}},"backgroundColor":"gray-900","layout":{"type":"constrained"}} -->
+			<div class="wp-block-group termimal-product-card has-gray-900-background-color has-background" style="border-radius:12px;padding-top:var(--wp--preset--spacing--4);padding-right:var(--wp--preset--spacing--4);padding-bottom:var(--wp--preset--spacing--4);padding-left:var(--wp--preset--spacing--4)">
+				<!-- wp:post-featured-image {"isLink":true,"aspectRatio":"4/3","style":{"border":{"radius":"8px"}}} /-->
+
+				<!-- wp:post-title {"isLink":true,"fontSize":"xl","fontFamily":"display"} /-->
+
+				<!-- wp:post-excerpt {"moreText":"View product","excerptLength":18} /-->
+			</div>
+			<!-- /wp:group -->
+		<!-- /wp:post-template -->
+
+		<!-- wp:query-no-results -->
+			<!-- wp:paragraph {"align":"center","textColor":"gray-400"} -->
+			<p class="has-text-align-center has-gray-400-color has-text-color">No products yet. Add your first product from the admin.</p>
+			<!-- /wp:paragraph -->
+		<!-- /wp:query-no-results -->
+	</div>
+	<!-- /wp:query -->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","area":"footer"} /-->
