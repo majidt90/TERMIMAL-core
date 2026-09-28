@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       TERMIMAL Core
  * Plugin URI:        https://termimal.com
- * Description:       Companion plugin for the TERMIMAL portfolio theme. Registers the Product CPT, meta fields (external link, gallery, related products) and admin settings.
- * Version:           1.0.1
+ * Description:       Companion plugin for the TERMIMAL portfolio theme. Product CPT, categories, gallery, related products, tech/status/year meta, and featured homepage flag.
+ * Version:           1.1.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            TERMIMAL
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TERMIMAL_CORE_VERSION', '1.0.1' );
+define( 'TERMIMAL_CORE_VERSION', '1.1.0' );
 define( 'TERMIMAL_CORE_FILE', __FILE__ );
 define( 'TERMIMAL_CORE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TERMIMAL_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -24,9 +24,11 @@ define( 'TERMIMAL_CORE_URL', plugin_dir_url( __FILE__ ) );
 function termimal_core_load() {
 	$includes = array(
 		TERMIMAL_CORE_PATH . 'includes/class-cpt.php',
+		TERMIMAL_CORE_PATH . 'includes/class-taxonomy.php',
 		TERMIMAL_CORE_PATH . 'includes/class-meta.php',
 		TERMIMAL_CORE_PATH . 'includes/class-admin.php',
 	);
+
 	foreach ( $includes as $file ) {
 		if ( ! file_exists( $file ) ) {
 			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
@@ -36,6 +38,7 @@ function termimal_core_load() {
 		}
 		require_once $file;
 	}
+
 	return true;
 }
 
@@ -43,6 +46,7 @@ function termimal_core_init() {
 	if ( ! termimal_core_load() ) {
 		return;
 	}
+
 	if ( class_exists( 'Termimal_Meta' ) ) {
 		Termimal_Meta::init();
 	}
@@ -52,20 +56,26 @@ function termimal_core_init() {
 }
 add_action( 'plugins_loaded', 'termimal_core_init' );
 
-function termimal_core_register_cpt() {
+function termimal_core_register_types() {
 	if ( ! class_exists( 'Termimal_CPT' ) ) {
 		termimal_core_load();
 	}
 	if ( class_exists( 'Termimal_CPT' ) ) {
 		Termimal_CPT::register();
 	}
+	if ( class_exists( 'Termimal_Taxonomy' ) ) {
+		Termimal_Taxonomy::register();
+	}
 }
-add_action( 'init', 'termimal_core_register_cpt', 5 );
+add_action( 'init', 'termimal_core_register_types', 5 );
 
 function termimal_core_activate() {
 	termimal_core_load();
 	if ( class_exists( 'Termimal_CPT' ) ) {
 		Termimal_CPT::register();
+	}
+	if ( class_exists( 'Termimal_Taxonomy' ) ) {
+		Termimal_Taxonomy::register();
 	}
 	flush_rewrite_rules();
 }
