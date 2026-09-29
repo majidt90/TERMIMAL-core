@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       TERMIMAL Core
  * Plugin URI:        https://termimal.com
- * Description:       TERMIMAL portfolio: products, Q&A, FAQ, EN/FA + Polylang (related/category map), Getting Started, GA4, Gutenberg grid, SEO.
- * Version:           2.0.0
+ * Description:       TERMIMAL portfolio: products, Q&A, FAQ, EN/FA + Polylang, blocks Card/FAQ/Changelog, CSV import, GA4, SEO.
+ * Version:           2.1.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            TERMIMAL
@@ -15,7 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TERMIMAL_CORE_VERSION', '2.0.0' );
+define( 'TERMIMAL_CORE_VERSION', '2.1.0' );
 define( 'TERMIMAL_CORE_FILE', __FILE__ );
 define( 'TERMIMAL_CORE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TERMIMAL_CORE_URL', plugin_dir_url( __FILE__ ) );

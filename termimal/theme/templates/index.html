@@ -11,24 +11,57 @@
 	<p class="has-text-align-center termimal-blur-in has-gray-400-color has-text-color has-lg-font-size">AI-powered tools built for precision.</p>
 	<!-- /wp:paragraph -->
 
-	<!-- wp:spacer {"height":"48px"} -->
-	<div style="height:48px" aria-hidden="true" class="wp-block-spacer"></div>
+	<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|6"}}}} -->
+	<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--6)">
+		<!-- wp:button {"backgroundColor":"primary","textColor":"black","className":"is-style-fill"} -->
+		<div class="wp-block-button is-style-fill"><a class="wp-block-button__link has-black-color has-primary-background-color has-text-color has-background wp-element-button" href="/product/">Explore products</a></div>
+		<!-- /wp:button -->
+	</div>
+	<!-- /wp:buttons -->
+
+	<!-- wp:spacer {"height":"56px"} -->
+	<div style="height:56px" aria-hidden="true" class="wp-block-spacer"></div>
 	<!-- /wp:spacer -->
 
-	<!-- wp:query {"queryId":1,"query":{"perPage":12,"pages":0,"offset":0,"postType":"termimal_product","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false},"displayLayout":{"type":"flex","columns":3},"align":"wide","className":"termimal-stagger"} -->
+	<!-- wp:heading {"textAlign":"center","level":2,"fontSize":"3xl","fontFamily":"display"} -->
+	<h2 class="wp-block-heading has-text-align-center has-display-font-family has-3-xl-font-size">Featured</h2>
+	<!-- /wp:heading -->
+
+	<!-- wp:paragraph {"align":"center","textColor":"gray-400","fontSize":"sm"} -->
+	<p class="has-text-align-center has-gray-400-color has-text-color has-sm-font-size">Highlighted tools from the TERMIMAL portfolio.</p>
+	<!-- /wp:paragraph -->
+
+	<!-- wp:spacer {"height":"24px"} -->
+	<div style="height:24px" aria-hidden="true" class="wp-block-spacer"></div>
+	<!-- /wp:spacer -->
+
+	<!-- wp:shortcode -->
+	[termimal_products limit="3" columns="3" featured="1"]
+	<!-- /wp:shortcode -->
+
+	<!-- wp:spacer {"height":"56px"} -->
+	<div style="height:56px" aria-hidden="true" class="wp-block-spacer"></div>
+	<!-- /wp:spacer -->
+
+	<!-- wp:heading {"textAlign":"center","level":2,"fontSize":"3xl","fontFamily":"display"} -->
+	<h2 class="wp-block-heading has-text-align-center has-display-font-family has-3-xl-font-size">All products</h2>
+	<!-- /wp:heading -->
+
+	<!-- wp:spacer {"height":"24px"} -->
+	<div style="height:24px" aria-hidden="true" class="wp-block-spacer"></div>
+	<!-- /wp:spacer -->
+
+	<!-- wp:query {"queryId":1,"query":{"perPage":9,"pages":0,"offset":0,"postType":"termimal_product","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false},"displayLayout":{"type":"flex","columns":3},"align":"wide","className":"termimal-stagger"} -->
 	<div class="wp-block-query alignwide termimal-stagger">
 		<!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
 			<!-- wp:group {"className":"termimal-product-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|4","bottom":"var:preset|spacing|4","left":"var:preset|spacing|4","right":"var:preset|spacing|4"}},"border":{"radius":"12px"}},"backgroundColor":"gray-900","layout":{"type":"constrained"}} -->
 			<div class="wp-block-group termimal-product-card has-gray-900-background-color has-background" style="border-radius:12px;padding-top:var(--wp--preset--spacing--4);padding-right:var(--wp--preset--spacing--4);padding-bottom:var(--wp--preset--spacing--4);padding-left:var(--wp--preset--spacing--4)">
 				<!-- wp:post-featured-image {"isLink":true,"aspectRatio":"4/3","style":{"border":{"radius":"8px"}}} /-->
-
 				<!-- wp:post-title {"isLink":true,"fontSize":"xl","fontFamily":"display"} /-->
-
 				<!-- wp:post-excerpt {"moreText":"View product","excerptLength":18} /-->
 			</div>
 			<!-- /wp:group -->
 		<!-- /wp:post-template -->
-
 		<!-- wp:query-no-results -->
 			<!-- wp:paragraph {"align":"center","textColor":"gray-400"} -->
 			<p class="has-text-align-center has-gray-400-color has-text-color">No products yet. Add your first product from the admin.</p>
