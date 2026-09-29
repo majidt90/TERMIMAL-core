@@ -2,21 +2,20 @@
 /**
  * Plugin Name:       TERMIMAL Core
  * Plugin URI:        https://termimal.com
- * Description:       TERMIMAL portfolio companion: products, Q&A, FAQ, EN/FA bilingual (Audiowide + Vazirmatn), GA4/CTA analytics, Gutenberg grid, SEO.
- * Version:           1.8.0
+ * Description:       TERMIMAL portfolio: products, Q&A, FAQ, EN/FA + Polylang dual content, Audiowide/Vazirmatn, GA4, Gutenberg grid, SEO.
+ * Version:           1.9.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            TERMIMAL
  * Author URI:        https://termimal.com
  * License:           GPL-2.0-or-later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       termimal
  * Domain Path:       /languages
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TERMIMAL_CORE_VERSION', '1.8.0' );
+define( 'TERMIMAL_CORE_VERSION', '1.9.0' );
 define( 'TERMIMAL_CORE_FILE', __FILE__ );
 define( 'TERMIMAL_CORE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TERMIMAL_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -37,6 +36,7 @@ function termimal_core_load() {
 		TERMIMAL_CORE_PATH . 'includes/class-performance.php',
 		TERMIMAL_CORE_PATH . 'includes/class-i18n.php',
 		TERMIMAL_CORE_PATH . 'includes/class-analytics.php',
+		TERMIMAL_CORE_PATH . 'includes/class-polylang.php',
 	);
 	foreach ( $includes as $file ) {
 		if ( ! file_exists( $file ) ) {
@@ -66,10 +66,13 @@ function termimal_core_init() {
 		return;
 	}
 	load_plugin_textdomain( 'termimal', false, dirname( plugin_basename( TERMIMAL_CORE_FILE ) ) . '/languages' );
-	foreach ( array( 'Termimal_Meta', 'Termimal_Admin', 'Termimal_Frontend', 'Termimal_SEO', 'Termimal_Contact', 'Termimal_Comments', 'Termimal_Votes', 'Termimal_Export', 'Termimal_Blocks', 'Termimal_Performance', 'Termimal_Analytics' ) as $class ) {
+	foreach ( array( 'Termimal_Meta', 'Termimal_Admin', 'Termimal_Frontend', 'Termimal_SEO', 'Termimal_Contact', 'Termimal_Comments', 'Termimal_Votes', 'Termimal_Export', 'Termimal_Blocks', 'Termimal_Performance', 'Termimal_Analytics', 'Termimal_Polylang' ) as $class ) {
 		if ( class_exists( $class ) && method_exists( $class, 'init' ) ) {
 			call_user_func( array( $class, 'init' ) );
 		}
+	}
+	if ( class_exists( 'Termimal_Polylang' ) ) {
+		add_action( 'admin_notices', array( 'Termimal_Polylang', 'admin_hint' ) );
 	}
 }
 add_action( 'plugins_loaded', 'termimal_core_init' );
