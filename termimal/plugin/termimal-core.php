@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       TERMIMAL Core
  * Plugin URI:        https://termimal.com
- * Description:       Companion plugin for the TERMIMAL portfolio theme. Products, categories, filters, contact form, SEO schema, dual CTA (Visit/Demo/Docs), and more.
- * Version:           1.3.0
+ * Description:       Companion plugin for the TERMIMAL portfolio theme. Products, Q&A comments, filters, contact form, SEO, dual CTA, and more.
+ * Version:           1.4.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            TERMIMAL
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TERMIMAL_CORE_VERSION', '1.3.0' );
+define( 'TERMIMAL_CORE_VERSION', '1.4.0' );
 define( 'TERMIMAL_CORE_FILE', __FILE__ );
 define( 'TERMIMAL_CORE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TERMIMAL_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -30,6 +30,7 @@ function termimal_core_load() {
 		TERMIMAL_CORE_PATH . 'includes/class-frontend.php',
 		TERMIMAL_CORE_PATH . 'includes/class-seo.php',
 		TERMIMAL_CORE_PATH . 'includes/class-contact.php',
+		TERMIMAL_CORE_PATH . 'includes/class-comments.php',
 	);
 	foreach ( $includes as $file ) {
 		if ( ! file_exists( $file ) ) {
@@ -62,6 +63,9 @@ function termimal_core_init() {
 	if ( class_exists( 'Termimal_Contact' ) ) {
 		Termimal_Contact::init();
 	}
+	if ( class_exists( 'Termimal_Comments' ) ) {
+		Termimal_Comments::init();
+	}
 }
 add_action( 'plugins_loaded', 'termimal_core_init' );
 
@@ -86,6 +90,8 @@ function termimal_core_activate() {
 	if ( class_exists( 'Termimal_Taxonomy' ) ) {
 		Termimal_Taxonomy::register();
 	}
+	update_option( 'thread_comments', 1 );
+	update_option( 'thread_comments_depth', 5 );
 	flush_rewrite_rules();
 }
 register_activation_hook( __FILE__, 'termimal_core_activate' );

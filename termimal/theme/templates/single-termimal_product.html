@@ -13,13 +13,49 @@
 	<div style="height:48px" aria-hidden="true" class="wp-block-spacer"></div>
 	<!-- /wp:spacer -->
 
-	<!-- wp:heading {"level":3,"fontSize":"2xl","fontFamily":"display"} -->
-	<h3 class="wp-block-heading has-display-font-family has-2-xl-font-size">Related products</h3>
+	<!-- wp:heading {"level":2,"fontSize":"2xl","fontFamily":"display","className":"termimal-discussion-heading"} -->
+	<h2 class="wp-block-heading termimal-discussion-heading has-display-font-family has-2-xl-font-size">Discussion</h2>
 	<!-- /wp:heading -->
 
 	<!-- wp:paragraph {"textColor":"gray-400","fontSize":"sm"} -->
-	<p class="has-gray-400-color has-text-color has-sm-font-size">Linked products appear here when configured in the product settings.</p>
+	<p class="has-gray-400-color has-text-color has-sm-font-size">Ask a question or reply to others. Replies to questions are marked as answers.</p>
 	<!-- /wp:paragraph -->
+
+	<!-- wp:comments -->
+	<div class="wp-block-comments termimal-comments">
+		<!-- wp:comments-title {"level":3} /-->
+		<!-- wp:comment-template -->
+			<!-- wp:columns {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|4"}}}} -->
+			<div class="wp-block-columns" style="margin-bottom:var(--wp--preset--spacing--4)">
+				<!-- wp:column {"width":"40px"} -->
+				<div class="wp-block-column" style="flex-basis:40px">
+					<!-- wp:avatar {"size":40,"style":{"border":{"radius":"20px"}}} /-->
+				</div>
+				<!-- /wp:column -->
+				<!-- wp:column -->
+				<div class="wp-block-column">
+					<!-- wp:comment-author-name {"fontSize":"small"} /-->
+					<!-- wp:group {"style":{"spacing":{"margin":{"top":"0","bottom":"0"},"blockGap":"0.5em"}},"layout":{"type":"flex"}} -->
+					<div class="wp-block-group" style="margin-top:0;margin-bottom:0">
+						<!-- wp:comment-date {"fontSize":"small"} /-->
+						<!-- wp:comment-edit-link {"fontSize":"small"} /-->
+					</div>
+					<!-- /wp:group -->
+					<!-- wp:comment-content /-->
+					<!-- wp:comment-reply-link {"fontSize":"small"} /-->
+				</div>
+				<!-- /wp:column -->
+			</div>
+			<!-- /wp:columns -->
+		<!-- /wp:comment-template -->
+		<!-- wp:comments-pagination -->
+			<!-- wp:comments-pagination-previous /-->
+			<!-- wp:comments-pagination-numbers /-->
+			<!-- wp:comments-pagination-next /-->
+		<!-- /wp:comments-pagination -->
+		<!-- wp:post-comments-form /-->
+	</div>
+	<!-- /wp:comments -->
 
 </main>
 <!-- /wp:group -->
