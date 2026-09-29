@@ -2,12 +2,11 @@
 /**
  * Plugin Name:       TERMIMAL Core
  * Plugin URI:        https://termimal.com
- * Description:       TERMIMAL portfolio: products, Q&A, FAQ, EN/FA + Polylang, blocks, CSV import, accessible lightbox, performance, GA4, SEO.
- * Version:           2.2.0
+ * Description:       TERMIMAL portfolio: products, leads, Product Editor role, webhooks, EN/FA, blocks, CSV, a11y lightbox, GA4, SEO.
+ * Version:           2.3.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            TERMIMAL
- * Author URI:        https://termimal.com
  * License:           GPL-2.0-or-later
  * Text Domain:       termimal
  * Domain Path:       /languages
@@ -15,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TERMIMAL_CORE_VERSION', '2.2.0' );
+define( 'TERMIMAL_CORE_VERSION', '2.3.0' );
 define( 'TERMIMAL_CORE_FILE', __FILE__ );
 define( 'TERMIMAL_CORE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TERMIMAL_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -38,6 +37,9 @@ function termimal_core_load() {
 		TERMIMAL_CORE_PATH . 'includes/class-analytics.php',
 		TERMIMAL_CORE_PATH . 'includes/class-polylang.php',
 		TERMIMAL_CORE_PATH . 'includes/class-guide.php',
+		TERMIMAL_CORE_PATH . 'includes/class-leads.php',
+		TERMIMAL_CORE_PATH . 'includes/class-roles.php',
+		TERMIMAL_CORE_PATH . 'includes/class-webhooks.php',
 	);
 	foreach ( $includes as $file ) {
 		if ( ! file_exists( $file ) ) {
@@ -67,7 +69,7 @@ function termimal_core_init() {
 		return;
 	}
 	load_plugin_textdomain( 'termimal', false, dirname( plugin_basename( TERMIMAL_CORE_FILE ) ) . '/languages' );
-	foreach ( array( 'Termimal_Meta', 'Termimal_Admin', 'Termimal_Frontend', 'Termimal_SEO', 'Termimal_Contact', 'Termimal_Comments', 'Termimal_Votes', 'Termimal_Export', 'Termimal_Blocks', 'Termimal_Performance', 'Termimal_Analytics', 'Termimal_Polylang', 'Termimal_Guide' ) as $class ) {
+	foreach ( array( 'Termimal_Meta', 'Termimal_Admin', 'Termimal_Frontend', 'Termimal_SEO', 'Termimal_Contact', 'Termimal_Comments', 'Termimal_Votes', 'Termimal_Export', 'Termimal_Blocks', 'Termimal_Performance', 'Termimal_Analytics', 'Termimal_Polylang', 'Termimal_Guide', 'Termimal_Leads', 'Termimal_Roles', 'Termimal_Webhooks' ) as $class ) {
 		if ( class_exists( $class ) && method_exists( $class, 'init' ) ) {
 			call_user_func( array( $class, 'init' ) );
 		}
@@ -99,6 +101,9 @@ function termimal_core_activate() {
 		}
 		if ( class_exists( 'Termimal_Taxonomy' ) ) {
 			Termimal_Taxonomy::register();
+		}
+		if ( class_exists( 'Termimal_Roles' ) ) {
+			Termimal_Roles::ensure_role();
 		}
 		update_option( 'thread_comments', 1 );
 		update_option( 'thread_comments_depth', 5 );
