@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       TERMIMAL Core
  * Plugin URI:        https://termimal.com
- * Description:       Companion plugin for the TERMIMAL portfolio theme. Products, Q&A, FAQ, Gutenberg Product Grid, performance, SEO, and more.
- * Version:           1.6.0
+ * Description:       TERMIMAL portfolio companion: products, Q&A, FAQ, EN/FA bilingual (Audiowide + Vazirmatn), GA4/CTA analytics, Gutenberg grid, SEO.
+ * Version:           1.8.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            TERMIMAL
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TERMIMAL_CORE_VERSION', '1.6.0' );
+define( 'TERMIMAL_CORE_VERSION', '1.8.0' );
 define( 'TERMIMAL_CORE_FILE', __FILE__ );
 define( 'TERMIMAL_CORE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TERMIMAL_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -35,6 +35,8 @@ function termimal_core_load() {
 		TERMIMAL_CORE_PATH . 'includes/class-export.php',
 		TERMIMAL_CORE_PATH . 'includes/class-blocks.php',
 		TERMIMAL_CORE_PATH . 'includes/class-performance.php',
+		TERMIMAL_CORE_PATH . 'includes/class-i18n.php',
+		TERMIMAL_CORE_PATH . 'includes/class-analytics.php',
 	);
 	foreach ( $includes as $file ) {
 		if ( ! file_exists( $file ) ) {
@@ -48,12 +50,23 @@ function termimal_core_load() {
 	return true;
 }
 
+function termimal_core_boot_i18n() {
+	$file = TERMIMAL_CORE_PATH . 'includes/class-i18n.php';
+	if ( file_exists( $file ) ) {
+		require_once $file;
+		if ( class_exists( 'Termimal_I18n' ) ) {
+			Termimal_I18n::init();
+		}
+	}
+}
+add_action( 'plugins_loaded', 'termimal_core_boot_i18n', 0 );
+
 function termimal_core_init() {
 	if ( ! termimal_core_load() ) {
 		return;
 	}
 	load_plugin_textdomain( 'termimal', false, dirname( plugin_basename( TERMIMAL_CORE_FILE ) ) . '/languages' );
-	foreach ( array( 'Termimal_Meta', 'Termimal_Admin', 'Termimal_Frontend', 'Termimal_SEO', 'Termimal_Contact', 'Termimal_Comments', 'Termimal_Votes', 'Termimal_Export', 'Termimal_Blocks', 'Termimal_Performance' ) as $class ) {
+	foreach ( array( 'Termimal_Meta', 'Termimal_Admin', 'Termimal_Frontend', 'Termimal_SEO', 'Termimal_Contact', 'Termimal_Comments', 'Termimal_Votes', 'Termimal_Export', 'Termimal_Blocks', 'Termimal_Performance', 'Termimal_Analytics' ) as $class ) {
 		if ( class_exists( $class ) && method_exists( $class, 'init' ) ) {
 			call_user_func( array( $class, 'init' ) );
 		}
