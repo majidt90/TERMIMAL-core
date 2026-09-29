@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       TERMIMAL Core
  * Plugin URI:        https://termimal.com
- * Description:       Companion plugin for the TERMIMAL portfolio theme. Products, Q&A, FAQ, version/changelog, auto-related, CSV export, votes, SEO, and more.
- * Version:           1.5.0
+ * Description:       Companion plugin for the TERMIMAL portfolio theme. Products, Q&A, FAQ, Gutenberg Product Grid, performance, SEO, and more.
+ * Version:           1.6.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            TERMIMAL
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TERMIMAL_CORE_VERSION', '1.5.0' );
+define( 'TERMIMAL_CORE_VERSION', '1.6.0' );
 define( 'TERMIMAL_CORE_FILE', __FILE__ );
 define( 'TERMIMAL_CORE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TERMIMAL_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -33,6 +33,8 @@ function termimal_core_load() {
 		TERMIMAL_CORE_PATH . 'includes/class-comments.php',
 		TERMIMAL_CORE_PATH . 'includes/class-votes.php',
 		TERMIMAL_CORE_PATH . 'includes/class-export.php',
+		TERMIMAL_CORE_PATH . 'includes/class-blocks.php',
+		TERMIMAL_CORE_PATH . 'includes/class-performance.php',
 	);
 	foreach ( $includes as $file ) {
 		if ( ! file_exists( $file ) ) {
@@ -50,7 +52,8 @@ function termimal_core_init() {
 	if ( ! termimal_core_load() ) {
 		return;
 	}
-	foreach ( array( 'Termimal_Meta', 'Termimal_Admin', 'Termimal_Frontend', 'Termimal_SEO', 'Termimal_Contact', 'Termimal_Comments', 'Termimal_Votes', 'Termimal_Export' ) as $class ) {
+	load_plugin_textdomain( 'termimal', false, dirname( plugin_basename( TERMIMAL_CORE_FILE ) ) . '/languages' );
+	foreach ( array( 'Termimal_Meta', 'Termimal_Admin', 'Termimal_Frontend', 'Termimal_SEO', 'Termimal_Contact', 'Termimal_Comments', 'Termimal_Votes', 'Termimal_Export', 'Termimal_Blocks', 'Termimal_Performance' ) as $class ) {
 		if ( class_exists( $class ) && method_exists( $class, 'init' ) ) {
 			call_user_func( array( $class, 'init' ) );
 		}
