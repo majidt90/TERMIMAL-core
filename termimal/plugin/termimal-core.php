@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       TERMIMAL Core
  * Plugin URI:        https://termimal.com
- * Description:       TERMIMAL portfolio: products, Q&A, FAQ, EN/FA + Polylang dual content, Audiowide/Vazirmatn, GA4, Gutenberg grid, SEO.
- * Version:           1.9.0
+ * Description:       TERMIMAL portfolio: products, Q&A, FAQ, EN/FA + Polylang (related/category map), Getting Started, GA4, Gutenberg grid, SEO.
+ * Version:           2.0.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            TERMIMAL
@@ -15,7 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TERMIMAL_CORE_VERSION', '1.9.0' );
+define( 'TERMIMAL_CORE_VERSION', '2.0.0' );
 define( 'TERMIMAL_CORE_FILE', __FILE__ );
 define( 'TERMIMAL_CORE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TERMIMAL_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -37,6 +37,7 @@ function termimal_core_load() {
 		TERMIMAL_CORE_PATH . 'includes/class-i18n.php',
 		TERMIMAL_CORE_PATH . 'includes/class-analytics.php',
 		TERMIMAL_CORE_PATH . 'includes/class-polylang.php',
+		TERMIMAL_CORE_PATH . 'includes/class-guide.php',
 	);
 	foreach ( $includes as $file ) {
 		if ( ! file_exists( $file ) ) {
@@ -66,7 +67,7 @@ function termimal_core_init() {
 		return;
 	}
 	load_plugin_textdomain( 'termimal', false, dirname( plugin_basename( TERMIMAL_CORE_FILE ) ) . '/languages' );
-	foreach ( array( 'Termimal_Meta', 'Termimal_Admin', 'Termimal_Frontend', 'Termimal_SEO', 'Termimal_Contact', 'Termimal_Comments', 'Termimal_Votes', 'Termimal_Export', 'Termimal_Blocks', 'Termimal_Performance', 'Termimal_Analytics', 'Termimal_Polylang' ) as $class ) {
+	foreach ( array( 'Termimal_Meta', 'Termimal_Admin', 'Termimal_Frontend', 'Termimal_SEO', 'Termimal_Contact', 'Termimal_Comments', 'Termimal_Votes', 'Termimal_Export', 'Termimal_Blocks', 'Termimal_Performance', 'Termimal_Analytics', 'Termimal_Polylang', 'Termimal_Guide' ) as $class ) {
 		if ( class_exists( $class ) && method_exists( $class, 'init' ) ) {
 			call_user_func( array( $class, 'init' ) );
 		}
@@ -91,16 +92,23 @@ function termimal_core_register_types() {
 add_action( 'init', 'termimal_core_register_types', 5 );
 
 function termimal_core_activate() {
-	termimal_core_load();
-	if ( class_exists( 'Termimal_CPT' ) ) {
-		Termimal_CPT::register();
+	try {
+		termimal_core_load();
+		if ( class_exists( 'Termimal_CPT' ) ) {
+			Termimal_CPT::register();
+		}
+		if ( class_exists( 'Termimal_Taxonomy' ) ) {
+			Termimal_Taxonomy::register();
+		}
+		update_option( 'thread_comments', 1 );
+		update_option( 'thread_comments_depth', 5 );
+		update_option( 'termimal_core_version', TERMIMAL_CORE_VERSION );
+		flush_rewrite_rules();
+	} catch ( Exception $e ) {
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			error_log( 'TERMIMAL Core activation: ' . $e->getMessage() );
+		}
 	}
-	if ( class_exists( 'Termimal_Taxonomy' ) ) {
-		Termimal_Taxonomy::register();
-	}
-	update_option( 'thread_comments', 1 );
-	update_option( 'thread_comments_depth', 5 );
-	flush_rewrite_rules();
 }
 register_activation_hook( __FILE__, 'termimal_core_activate' );
 
