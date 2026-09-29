@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       TERMIMAL Core
  * Plugin URI:        https://termimal.com
- * Description:       Companion plugin for the TERMIMAL portfolio theme. Products, categories, gallery lightbox, filters, search, sort, badges, and related products.
- * Version:           1.2.0
+ * Description:       Companion plugin for the TERMIMAL portfolio theme. Products, categories, filters, contact form, SEO schema, dual CTA (Visit/Demo/Docs), and more.
+ * Version:           1.3.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            TERMIMAL
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TERMIMAL_CORE_VERSION', '1.2.0' );
+define( 'TERMIMAL_CORE_VERSION', '1.3.0' );
 define( 'TERMIMAL_CORE_FILE', __FILE__ );
 define( 'TERMIMAL_CORE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TERMIMAL_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -28,6 +28,8 @@ function termimal_core_load() {
 		TERMIMAL_CORE_PATH . 'includes/class-meta.php',
 		TERMIMAL_CORE_PATH . 'includes/class-admin.php',
 		TERMIMAL_CORE_PATH . 'includes/class-frontend.php',
+		TERMIMAL_CORE_PATH . 'includes/class-seo.php',
+		TERMIMAL_CORE_PATH . 'includes/class-contact.php',
 	);
 	foreach ( $includes as $file ) {
 		if ( ! file_exists( $file ) ) {
@@ -53,6 +55,12 @@ function termimal_core_init() {
 	}
 	if ( class_exists( 'Termimal_Frontend' ) ) {
 		Termimal_Frontend::init();
+	}
+	if ( class_exists( 'Termimal_SEO' ) ) {
+		Termimal_SEO::init();
+	}
+	if ( class_exists( 'Termimal_Contact' ) ) {
+		Termimal_Contact::init();
 	}
 }
 add_action( 'plugins_loaded', 'termimal_core_init' );
